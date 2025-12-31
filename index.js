@@ -44,14 +44,15 @@ io.on("connection", (socket) => {
         "-c:v libx264", // H.264 video codec
         "-preset ultrafast", // Low latency (crucial for Render free tier)
         "-tune zerolatency",
-        "-maxrate 2500k",
-        "-bufsize 5000k",
+        "-maxrate 2000k", // Lowered slightly
+        "-bufsize 4000k", // Lowered slightly
         "-pix_fmt yuv420p",
         "-g 60", // Keyframe interval (approx 2s at 30fps)
         "-c:a aac", // AAC audio codec
         "-ar 44100",
         "-b:a 128k",
         "-f flv", // FLV format for RTMP
+        "-threads 2",
       ])
       .output(streamUrl)
       .on("start", (commandLine) => {
